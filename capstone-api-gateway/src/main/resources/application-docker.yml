@@ -1,0 +1,86 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: api-gateway-service
+
+  main:
+    web-application-type: reactive
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins:
+              - "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+
+        - id: policy-service
+          uri: lb://policy-service
+          predicates:
+            - Path=/policy-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-management-service
+          uri: lb://user-management-service
+          predicates:
+            - Path=/user-management/**
+          filters:
+            - StripPrefix=1
+
+        - id: claims-service
+          uri: lb://claims-service
+          predicates:
+            - Path=/claims-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: hospital-service
+          uri: lb://hospital-service
+          predicates:
+            - Path=/hospital-service/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: AUTH_SERVICE_SECRET_KEY_256_BITS_LONG_123456
+
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 10s
