@@ -1,0 +1,33 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: POLICY-SERVICE
+
+  datasource:
+    url: jdbc:mysql://mysql-policy:3306/policy_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+razorpay:
+  key:
+    id: rzp_test_S0LBUfSfKroGEG
+    secret: 1J8qVEDVotFIXvgTafDsbTGH
