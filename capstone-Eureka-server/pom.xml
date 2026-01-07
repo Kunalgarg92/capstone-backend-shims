@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2025.1.0</spring-cloud.version>
+		<sonar.organization>kunalgarg92</sonar.organization>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,6 +57,11 @@
 
 	<build>
 		<plugins>
+		<plugin>
+    <groupId>org.sonarsource.scanner.maven</groupId>
+    <artifactId>sonar-maven-plugin</artifactId>
+    <version>3.11.0.3922</version>
+</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

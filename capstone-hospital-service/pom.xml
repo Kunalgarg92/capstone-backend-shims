@@ -25,6 +25,7 @@
         <!-- ✅ MATCHING SPRING CLOUD VERSION -->
         <spring-cloud.version>2023.0.5</spring-cloud.version>
         <jacoco.version>0.8.12</jacoco.version>
+        <sonar.organization>kunalgarg92</sonar.organization>
     </properties>
 
     <dependencies>
@@ -105,6 +106,12 @@
 
     <build>
         <plugins>
+
+        <plugin>
+    <groupId>org.sonarsource.scanner.maven</groupId>
+    <artifactId>sonar-maven-plugin</artifactId>
+    <version>3.11.0.3922</version>
+</plugin>
 
             <!-- COMPILER -->
             <plugin>
